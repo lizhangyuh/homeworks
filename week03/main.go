@@ -37,7 +37,7 @@ func main() {
 	g.Go(func() error {
 		select {
 		case <-ctx.Done():
-			log.Printf("errgroup canceled\n")
+			log.Printf("shutdown canceled by errgroup\n")
 		case <-exit:
 			log.Printf("exit by request\n")
 		}
@@ -63,7 +63,7 @@ func main() {
 
 		select {
 		case <-ctx.Done():
-			log.Printf("os exit cancel")
+			log.Printf("os exit canceled by errgroup")
 			return nil
 		case sign := <-s:
 			fmt.Printf("%s\n", sign)
