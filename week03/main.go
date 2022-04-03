@@ -44,10 +44,10 @@ func main() {
 
 		// 等待5s后退出
 		log.Printf("server will exit in 5 sec...\n")
-		tmoCxt, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		timeoutCxt, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 		defer cancel()
 
-		return server.Shutdown(tmoCxt)
+		return server.Shutdown(timeoutCxt)
 	})
 
 	// server
@@ -60,12 +60,10 @@ func main() {
 	g.Go(func() error {
 		s := make(chan os.Signal, 1)
 		signal.Notify(s, syscall.SIGINT, syscall.SIGQUIT, syscall.SIGTERM)
-		defer func() {
-			signal.Stop(s)
-		}()
 
 		select {
 		case <-ctx.Done():
+			log.Printf("os exit cancel")
 			return nil
 		case sign := <-s:
 			fmt.Printf("%s\n", sign)
