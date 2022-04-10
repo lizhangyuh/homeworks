@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package api.app.v1;
+
+import "google/api/annotations.proto";
+// import "google/protobuf/empty.proto";
+// import "validate/validate.proto";
+
+option go_package = "app/api/app/v1;v1";
+
+service App {
+	rpc SignUp (SignUpRequest) returns (SignUpResponse){
+		option (google.api.http) = {
+			post: "/api/sign_up",
+			body: "*",
+		};
+	};
+	rpc SignIn (SignInRequest) returns (SignInResponse){
+		option (google.api.http) = {
+			post: "/api/sign_in",
+			body: "*",
+		};
+	};
+}
+
+message SignInRequest {
+	string phone = 1;
+	string password = 2;
+}
+message SignInResponse {
+	int64 id = 1;
+	string phone = 2;
+	string nickname = 3;
+}
+message SignUpRequest {
+	string phone = 1;
+	string nickname = 2;
+	string password = 3;
+}
+message SignUpResponse {
+	int64 id = 1;
+	string phone = 2;
+	string nickname = 3;
+}
+
+message UpdateUserRequest {}
+message UpdateUserReply {}
+
+message DeleteUserRequest {}
+message DeleteUserReply {}
+
+message GetUserRequest {}
+message GetUserReply {}
+
+message ListUserRequest {}
+message ListUserReply {}
