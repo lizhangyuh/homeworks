@@ -3,7 +3,7 @@
 
 `redis-benchmark -t get,set -d 10`
 
-测试结果： benchmark.csv
+测试结果： [benchmark.csv](https://github.com/lizhangyuh/homeworks/blob/main/week08/benchmark.csv)
 
 
 ### 2.写入一定量的 kv 数据, 根据数据大小 1w-50w 自己评估, 结合写入前后的 info memory 信息 , 分析上述不同value 大小下，平均每个 key 的占用内存空间
@@ -30,4 +30,5 @@
 | 1KB | 50k | 46816 | 51649808 | 1032.06 Byte |
 | 5KB | 50k | 50016 | 257251808 | 5144.04 Byte |
 
+结论：数据量越大，平均每个key的占用空间越大
 
