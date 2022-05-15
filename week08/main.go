@@ -28,20 +28,20 @@ func main() {
 
 	ctx = context.Background()
 
-	// tc_10b_10k := &TestCase{key: "10b_10k", valueSize: 10, count: 10000}
-	// tc_10b_10k.test_memory()
-	// tc_20b_10k := &TestCase{key: "20b_10k", valueSize: 20, count: 10000}
-	// tc_20b_10k.test_memory()
-	// tc_50b_10k := &TestCase{key: "50b_10k", valueSize: 50, count: 10000}
-	// tc_50b_10k.test_memory()
-	// tc_100b_10k := &TestCase{key: "100b_10k", valueSize: 100, count: 10000}
-	// tc_100b_10k.test_memory()
-	// tc_200b_10k := &TestCase{key: "200b_10k", valueSize: 200, count: 10000}
-	// tc_200b_10k.test_memory()
-	// tc_1kb_10k := &TestCase{key: "1kb_10k", valueSize: 1000, count: 10000}
-	// tc_1kb_10k.test_memory()
-	// tc_5kb_10k := &TestCase{key: "5kb_10k", valueSize: 5000, count: 10000}
-	// tc_5kb_10k.test_memory()
+	tc_10b_10k := &TestCase{key: "10b_10k", valueSize: 10, count: 10000}
+	tc_10b_10k.test_memory()
+	tc_20b_10k := &TestCase{key: "20b_10k", valueSize: 20, count: 10000}
+	tc_20b_10k.test_memory()
+	tc_50b_10k := &TestCase{key: "50b_10k", valueSize: 50, count: 10000}
+	tc_50b_10k.test_memory()
+	tc_100b_10k := &TestCase{key: "100b_10k", valueSize: 100, count: 10000}
+	tc_100b_10k.test_memory()
+	tc_200b_10k := &TestCase{key: "200b_10k", valueSize: 200, count: 10000}
+	tc_200b_10k.test_memory()
+	tc_1kb_10k := &TestCase{key: "1kb_10k", valueSize: 1000, count: 10000}
+	tc_1kb_10k.test_memory()
+	tc_5kb_10k := &TestCase{key: "5kb_10k", valueSize: 5000, count: 10000}
+	tc_5kb_10k.test_memory()
 
 	tc_10b_50k := &TestCase{key: "10b_50k", valueSize: 10, count: 50000}
 	tc_10b_50k.test_memory()
