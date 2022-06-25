@@ -61,8 +61,6 @@ func (uc *PostUsecase) CreatePost(ctx context.Context, post *Post) (*Post, error
 
 	post, err := uc.repo.Create(ctx, post)
 
-	// push to kafka
-
 	return post, err
 }
 
