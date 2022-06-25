@@ -1,0 +1,21 @@
+server:
+  http:
+    addr: 0.0.0.0:8000
+    timeout: 1s
+  grpc:
+    addr: 0.0.0.0:9000
+    timeout: 1s
+data:
+  database:
+    driver: mysql
+    source: root:mfitness@tcp(127.0.0.1:3306)/test?charset=utf8mb4&parseTime=True&loc=Local
+  redis:
+    addr: 127.0.0.1:6379
+    read_timeout: 0.2s
+    write_timeout: 0.2s
+service:
+  user:
+    endpoint: discovery:///user.service
+auth:
+  service_key: bb2791d735f7305da0845b15b66a968ad28
+  api_key: 971c8773491f0a0c5986077cbb7df1e8127bbbe01574053520bf36c86aadbd28eee4e13bd7122780ad4ce204d383db0b6aec49f880d3e5dce5ef7f33650edf7e

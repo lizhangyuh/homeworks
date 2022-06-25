@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package api.post.service.v1;
+
+option go_package = "nvm.com/mrc-api-go/api/post/service/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.post.service.v1";
+
+service Post {
+	rpc CreatePost (CreatePostRequest) returns (CreatePostReply);
+	rpc UpdatePost (UpdatePostRequest) returns (UpdatePostReply);
+	rpc DeletePost (DeletePostRequest) returns (DeletePostReply);
+	rpc GetPost (GetPostRequest) returns (GetPostReply);
+	rpc ListPost (ListPostRequest) returns (ListPostReply);
+}
+
+message CreatePostRequest {
+	string title = 1;
+	string content = 2;
+	int64 userId = 3;
+	bool published = 4;
+}
+message CreatePostReply {
+	int64 id = 1;
+	string title = 2;
+	string content = 3;
+	int64 userId = 4;
+	bool published = 5;
+}
+
+message UpdatePostRequest {
+	string title = 1;
+	string content = 2;
+	int64 userId = 3;
+	bool published = 4;
+}
+message UpdatePostReply {
+	int64 id = 1;
+}
+
+message DeletePostRequest {
+	int64 id = 1;
+}
+message DeletePostReply {
+	bool ok = 1;
+}
+
+message GetPostRequest {
+	int64 id = 1;
+}
+message GetPostReply {
+	int64 id = 1;
+	string title = 2;
+	string content = 3;
+	int64 userId = 4;
+	bool published = 5;
+}
+
+message ListPostRequest {
+	string title = 1;
+}
+
+message ListPostReply {
+	message Post {
+		int64 id = 1;
+		string title = 2;
+		string userName = 3;
+		bool published = 4;
+	}
+	repeated Post data = 1;
+}

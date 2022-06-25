@@ -1,0 +1,217 @@
+syntax = "proto3";
+
+package bff.mobile.v1;
+
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+// import "google/protobuf/empty.proto";
+// import "validate/validate.proto";
+
+option go_package = "api/bff/mobile/v1;v1";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+  info: {
+    title: "mobile api";
+    version: "0.0.1";
+  };
+  consumes: "application/json";
+  produces: "application/json";
+  security_definitions:    {
+    security: {
+      key: "api_key";
+      value: {
+        type: TYPE_API_KEY;
+        in: IN_HEADER;
+        name: "Authorization";
+      };
+    }
+  };
+};
+
+service Mobile {
+	// Auth
+	rpc SignUp (SignUpRequest) returns (SignUpResponse){
+		option (google.api.http) = {
+			post: "/api/sign_up",
+			body: "*",
+		};
+	};
+
+	rpc SignInByPwd (SignInByPwdRequest) returns (SignInResponse){
+		option (google.api.http) = {
+			post: "/api/sign_in_by_pwd",
+			body: "*",
+		};
+	};
+
+	// User
+	rpc CurrentUser (CurrentUserRequest) returns (CurrentUserResponse){
+		option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+				security: {
+						security_requirement: {
+								key: "api_key";
+								value: {};
+						}
+				}
+		};
+
+		option (google.api.http) = {
+			get: "/api/current_user",
+		};
+	};
+
+	// Post
+	rpc CreatePost (CreatePostRequest) returns (CreatePostReply){
+		option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+				security: {
+						security_requirement: {
+								key: "api_key";
+								value: {};
+						}
+				}
+		};
+
+		option (google.api.http) = {
+			post: "/api/posts",
+			body: "*",
+		};
+	};
+
+	rpc PostIndex (ListPostRequest) returns (ListPostReply){
+		option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+				security: {
+						security_requirement: {
+								key: "api_key";
+								value: {};
+						}
+				}
+		};
+
+		option (google.api.http) = {
+			get: "/api/posts",
+		};
+	};
+
+	rpc PostShow (GetPostRequest) returns (GetPostReply){
+		option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+				security: {
+						security_requirement: {
+								key: "api_key";
+								value: {};
+						}
+				}
+		};
+
+		option (google.api.http) = {
+			get: "/api/posts/{id}",
+		};
+	};
+
+	rpc UpdatePost (UpdatePostRequest) returns (UpdatePostReply){
+		option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+				security: {
+						security_requirement: {
+								key: "api_key";
+								value: {};
+						}
+				}
+		};
+
+		option (google.api.http) = {
+			put: "/api/current_user",
+			body: "*",
+		};
+	};
+}
+
+message SignInByPwdRequest {
+	string phone = 1;
+	string password = 2;
+}
+message SignInResponse {
+	string token = 1;
+}
+message SignUpRequest {
+	string phone = 1;
+	string nickname = 2;
+	string password = 3;
+}
+message SignUpResponse {
+	int64 id = 1;
+	string phone = 2;
+	string nickname = 3;
+}
+
+// User
+message UpdateUserRequest {}
+message UpdateUserReply {}
+
+message CurrentUserRequest {}
+message CurrentUserResponse {
+	int64 id = 1;
+	string phone = 2;
+	string nickname = 3;
+}
+
+message GetUserRequest {}
+message GetUserReply {}
+
+message ListUserRequest {}
+message ListUserReply {}
+
+// Post
+message CreatePostRequest {
+	string title = 1;
+	string content = 2;
+	int64 userId = 3;
+	bool published = 4;
+}
+message CreatePostReply {
+	int64 id = 1;
+	string title = 2;
+	string content = 3;
+	int64 userId = 4;
+	bool published = 5;
+}
+
+message UpdatePostRequest {
+	string title = 1;
+	string content = 2;
+	int64 userId = 3;
+	bool published = 4;
+}
+message UpdatePostReply {
+	int64 id = 1;
+}
+
+message DeletePostRequest {
+	int64 id = 1;
+}
+message DeletePostReply {
+	bool ok = 1;
+}
+
+message GetPostRequest {
+	int64 id = 1;
+}
+message GetPostReply {
+	int64 id = 1;
+	string title = 2;
+	string content = 3;
+	int64 userId = 4;
+	bool published = 5;
+}
+
+message ListPostRequest {
+	string title = 1;
+}
+
+message ListPostReply {
+	message Post {
+		int64 id = 1;
+		string title = 2;
+		string userName = 3;
+		bool published = 4;
+	}
+	repeated Post data = 1;
+}

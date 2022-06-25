@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package api.post.service.v1;
+import "errors/errors.proto";
+
+option go_package = "nvm.com/mrc-api-go/api/post/service/v1;v1";
+
+enum PostServiceErrorReason {
+  option (errors.default_code) = 500;
+
+  UNKNOWN_ERROR = 0;
+  POST_NOT_FOUND = 1 [(errors.code) = 404];
+}
